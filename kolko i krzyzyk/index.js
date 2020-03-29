@@ -1,10 +1,18 @@
+
 var Cell = /** @class */ (function () {
     function Cell(num) {
         this.num = num;
+        this.runda = 1;
         this.Num = num;
     }
-    Cell.prototype.clickCell = function () {
-        console.log(this.Num);
+    Cell.prototype.clickCell = function (e) {
+        var gracz1 = "fa-times";
+        var gracz2 = "fa-circle-o";
+        var tura = this.runda % 2 === 0 ? gracz1 : gracz2;
+        console.log(tura);
+        console.log(this.runda);
+        e.classList.add(tura);
+        this.runda++;
     };
     return Cell;
 }());
@@ -35,13 +43,13 @@ window.onload = function () {
     var cell32 = document.getElementById("cell32");
     var cell33 = document.getElementById("cell33");
     var board = new Board([cell1, cell2, cell3, cell4, cell5, cell6, cell7, cell8, cell9,]);
-    cell11.onclick = function (e) { cell1.clickCell(); };
-    cell12.onclick = function (e) { cell2.clickCell(); };
-    cell13.onclick = function (e) { cell3.clickCell(); };
-    cell21.onclick = function (e) { cell4.clickCell(); };
-    cell22.onclick = function (e) { cell5.clickCell(); };
-    cell23.onclick = function (e) { cell6.clickCell(); };
-    cell31.onclick = function (e) { cell7.clickCell(); };
-    cell32.onclick = function (e) { cell8.clickCell(); };
-    cell33.onclick = function (e) { cell9.clickCell(); };
+    cell11.onclick = function (e) { cell1.clickCell(cell11); };
+    cell12.onclick = function (e) { cell2.clickCell(cell12); };
+    cell13.onclick = function (e) { cell3.clickCell(cell13); };
+    cell21.onclick = function (e) { cell4.clickCell(cell21); };
+    cell22.onclick = function (e) { cell5.clickCell(cell22); };
+    cell23.onclick = function (e) { cell6.clickCell(cell23); };
+    cell31.onclick = function (e) { cell7.clickCell(cell31); };
+    cell32.onclick = function (e) { cell8.clickCell(cell32); };
+    cell33.onclick = function (e) { cell9.clickCell(cell33); };
 };

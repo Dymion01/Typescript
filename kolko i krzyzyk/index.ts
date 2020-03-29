@@ -1,11 +1,24 @@
+let runda = 1;
 class Cell {
 public Num:number
+
+
   constructor (public num: number ){
       this.Num = num;
       
   }
-public clickCell(){
-  console.log(this.Num);
+  
+public clickCell(e){
+  
+  const gracz1 ="fa-times";
+  const gracz2 ="fa-circle";
+
+  const tura = runda % 2 === 0 ? gracz1 : gracz2 ;
+  console.log(tura);
+  console.log(runda)
+  e.classList.add(tura);
+  runda++;
+ 
 }
 }
 
@@ -40,15 +53,15 @@ window.onload = () => {
 
      let board :Board = new Board( [cell1 ,cell2, cell3, cell4 ,cell5, cell6, cell7 ,cell8, cell9, ]);
 
-     cell11.onclick = (e) => { cell1.clickCell()}
-     cell12.onclick = (e) => { cell2.clickCell()}
-     cell13.onclick = (e) => { cell3.clickCell()}
-     cell21.onclick = (e) => { cell4.clickCell()}
-     cell22.onclick = (e) => { cell5.clickCell()}
-     cell23.onclick = (e) => { cell6.clickCell()}
-     cell31.onclick = (e) => { cell7.clickCell()}
-     cell32.onclick = (e) => { cell8.clickCell()}
-     cell33.onclick = (e) => { cell9.clickCell()}
+     cell11.onclick = (e) => { cell1.clickCell(cell11)}
+     cell12.onclick = (e) => { cell2.clickCell(cell12)}
+     cell13.onclick = (e) => { cell3.clickCell(cell13)}
+     cell21.onclick = (e) => { cell4.clickCell(cell21)}
+     cell22.onclick = (e) => { cell5.clickCell(cell22)}
+     cell23.onclick = (e) => { cell6.clickCell(cell23)}
+     cell31.onclick = (e) => { cell7.clickCell(cell31)}
+     cell32.onclick = (e) => { cell8.clickCell(cell32)}
+     cell33.onclick = (e) => { cell9.clickCell(cell33)}
      
     
 
