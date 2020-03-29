@@ -1,5 +1,6 @@
 table {
     border-collapse: collapse;
+
   }
   
   table, td, tr {
@@ -10,3 +11,7 @@ table {
      width: 100px;
      height: 100px;
  } 
+ table:hover {
+   cursor: pointer;
+   
+ }
