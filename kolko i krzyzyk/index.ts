@@ -1,23 +1,43 @@
 let runda = 1;
+const plansza = [
+  "" , "" , "" ,
+  "" , "" , "" ,
+  "" , "" , "" 
+ ];
+ const listaRuchow : Array<string> = [
+  "" , "" , "" ,
+  "" , "" , "" ,
+  "" , "" , "" 
+ ];
 class Cell {
 public Num:number
 
 
   constructor (public num: number ){
-      this.Num = num;
+      this.Num = num-1;
       
   }
-  
+
 public clickCell(e){
   
   const gracz1 ="fa-times";
-  const gracz2 ="fa-circle";
+  const gracz2 ="fa-circle-o";
 
+  if(listaRuchow[this.Num] !== "") return;
   const tura = runda % 2 === 0 ? gracz1 : gracz2 ;
-  console.log(tura);
-  console.log(runda)
+  listaRuchow[this.Num] = tura;
+  console.log(this.Num);
+  // console.log(runda);
   e.classList.add(tura);
+  e.classList.add("fa-5x")
   runda++;
+  
+  // listaRuchow.push(tura);
+  // plansza.forEach(element => {
+    
+  //   listaRuchow.push(element);
+  // });
+  console.log(listaRuchow);
  
 }
 }
@@ -25,9 +45,18 @@ public clickCell(e){
 
 class Board {
      public tab = Cell[9];
+     
      constructor (t : Cell[]){
          this.tab = t ;
      }
+
+
+     kombinacje =[
+        [1,2,3] , [4,5,6] , [7,8,9] ,
+        [1,4,7] , [2,5,8] , [3,6,9] , 
+        [1,5,9] , [3,5,7] 
+     ];
+     
 
 }
 
