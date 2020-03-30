@@ -1,23 +1,42 @@
 let runda = 1;
-const plansza = [
+let  zwyciezca  = null;
+  const listaRuchow : Array<string> = [
   "" , "" , "" ,
   "" , "" , "" ,
   "" , "" , "" 
  ];
- const listaRuchow : Array<string> = [
-  "" , "" , "" ,
-  "" , "" , "" ,
-  "" , "" , "" 
- ];
-class Cell {
+  const kombinacje =[
+  [0,1,2] , [3,4,5] , [6,7,8] ,
+  [0,3,6] , [1,4,7] , [2,5,8] , 
+  [0,4,8] , [2,4,6] 
+   ];
+   function Check() {
+   let moves = {
+     "fa-times" : [],
+     "fa-circle-o" : [] 
+     
+   };
+   listaRuchow.forEach((field , index ) =>moves[field] ? moves[field].push(index) : null);
+   kombinacje.forEach(kombinacja => {
+     if(kombinacja.every(index => moves["fa-circle-o"].indexOf(index) > -1)) {
+      zwyciezca = "Wygrał gracz pierwszy";
+     }
+     if(kombinacja.every(index => moves["fa-times"].indexOf(index) > -1)) {
+      zwyciezca = "Wygrał gracz drugi";
+     }
+   });
+   return zwyciezca;
+ }
+
+ class Cell {
 public Num:number
 
 
   constructor (public num: number ){
       this.Num = num-1;
       
-  }
-
+  };
+ 
 public clickCell(e){
   
   const gracz1 ="fa-times";
@@ -26,21 +45,17 @@ public clickCell(e){
   if(listaRuchow[this.Num] !== "") return;
   const tura = runda % 2 === 0 ? gracz1 : gracz2 ;
   listaRuchow[this.Num] = tura;
-  console.log(this.Num);
-  // console.log(runda);
+
   e.classList.add(tura);
   e.classList.add("fa-5x")
   runda++;
   
-  // listaRuchow.push(tura);
-  // plansza.forEach(element => {
-    
-  //   listaRuchow.push(element);
-  // });
-  console.log(listaRuchow);
+  console.log(Check());
+  
+  // console.log(listaRuchow);
  
-}
-}
+};
+ }
 
 
 class Board {
@@ -51,14 +66,9 @@ class Board {
      }
 
 
-     kombinacje =[
-        [1,2,3] , [4,5,6] , [7,8,9] ,
-        [1,4,7] , [2,5,8] , [3,6,9] , 
-        [1,5,9] , [3,5,7] 
-     ];
      
 
-}
+};
 
 window.onload = () => {
     let cell1 = new Cell(1);
@@ -82,15 +92,15 @@ window.onload = () => {
 
      let board :Board = new Board( [cell1 ,cell2, cell3, cell4 ,cell5, cell6, cell7 ,cell8, cell9, ]);
 
-     cell11.onclick = (e) => { cell1.clickCell(cell11)}
-     cell12.onclick = (e) => { cell2.clickCell(cell12)}
-     cell13.onclick = (e) => { cell3.clickCell(cell13)}
-     cell21.onclick = (e) => { cell4.clickCell(cell21)}
-     cell22.onclick = (e) => { cell5.clickCell(cell22)}
-     cell23.onclick = (e) => { cell6.clickCell(cell23)}
-     cell31.onclick = (e) => { cell7.clickCell(cell31)}
-     cell32.onclick = (e) => { cell8.clickCell(cell32)}
-     cell33.onclick = (e) => { cell9.clickCell(cell33)}
+     cell11.onclick = (e) => { cell1.clickCell(cell11)};/*, console.log (cell1.clickCell(cell11))*/
+     cell12.onclick = (e) => { cell2.clickCell(cell12)};
+     cell13.onclick = (e) => { cell3.clickCell(cell13)};
+     cell21.onclick = (e) => { cell4.clickCell(cell21)};
+     cell22.onclick = (e) => { cell5.clickCell(cell22)};
+     cell23.onclick = (e) => { cell6.clickCell(cell23)};
+     cell31.onclick = (e) => { cell7.clickCell(cell31)};
+     cell32.onclick = (e) => { cell8.clickCell(cell32)};
+     cell33.onclick = (e) => { cell9.clickCell(cell33)};
      
     
 
