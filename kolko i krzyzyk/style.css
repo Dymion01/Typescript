@@ -1,6 +1,6 @@
 table {
     border-collapse: collapse;
-
+    display: inline-block;
   }
   
   table, td, tr {
@@ -16,3 +16,18 @@ table {
    cursor: pointer;
 
  }
+ #playGround{
+   text-align: center;
+ }
+header{
+
+    text-align: center;
+    height: 50px;
+    font: 30px Arial, sans-serif;
+}
+#buttons {
+  text-align: center;
+}
+button {
+  display: inline-block;
+}

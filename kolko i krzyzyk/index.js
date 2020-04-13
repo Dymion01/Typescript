@@ -5,33 +5,6 @@ var listaRuchow = [
     "", "", "",
     "", "", ""
 ];
-//   const kombinacje =[
-//   [0,1,2] , [3,4,5] , [6,7,8] ,
-//   [0,3,6] , [1,4,7] , [2,5,8] , 
-//   [0,4,8] , [2,4,6] 
-//    ];
-//    function Check() {
-//    let moves = {
-//      "fa-times" : [],
-//      "fa-circle-o" : [] 
-//    };
-//    listaRuchow.forEach((field , index ) =>moves[field] ? moves[field].push(index) : null);
-//    kombinacje.forEach(kombinacja => {
-//      if(kombinacja.every(index => moves["fa-circle-o"].indexOf(index) > -1)) {
-//       zwyciezca = "Wygrał gracz pierwszy";
-//       window.alert(zwyciezca);
-//      }
-//      if(kombinacja.every(index => moves["fa-times"].indexOf(index) > -1)) {
-//       zwyciezca = "Wygrał gracz drugi";
-//       window.alert(zwyciezca);
-//      }
-//      if(moves["fa-circle-o"].length + moves["fa-times"].length == 9) {
-//       zwyciezca = "Remis!";
-//       window.alert(zwyciezca);
-//      }
-//    });
-//    return zwyciezca;
-//  }
 var Cell = /** @class */ (function () {
     function Cell(num) {
         this.num = num;
@@ -56,12 +29,9 @@ var Board = /** @class */ (function () {
     function Board(num) {
         var _this = this;
         this.zwyciezca = null;
-        this.kombinacje = [
-            [0, 1, 2], [3, 4, 5], [6, 7, 8],
-            [0, 3, 6], [1, 4, 7], [2, 5, 8],
-            [0, 4, 8], [2, 4, 6]
-        ];
+        this.Size = num;
         var cells = [];
+        this.SetConbinatoions(num);
         for (var i = 0; i < num * num; i++) {
             cells[i] = new Cell(i);
         }
@@ -69,7 +39,6 @@ var Board = /** @class */ (function () {
         var doc = document.getElementById("playGround");
         var board = document.createElement('table');
         board.id = "table";
-        var numberOfClickcell = -1;
         var _loop_1 = function (i) {
             var tr = document.createElement('tr');
             var _loop_2 = function (j) {
@@ -77,14 +46,12 @@ var Board = /** @class */ (function () {
                 td.classList.add("fa");
                 td.classList.add("box");
                 td.id = ("cell" + i + j);
-                console.log(numberOfClickcell);
                 if (td.id = ("cell" + i + j)) {
-                    td.onclick = function (e) { cells[3 * (i) + j].clickCell(td), _this.Check(); };
+                    td.onclick = function (e) { cells[_this.Size * (i) + j].clickCell(td), _this.Check(); };
                 }
                 ;
                 tr.appendChild(td);
-                // console.log(numberOfClickcell);
-                numberOfClickcell++;
+                console.log(td);
             };
             for (var j = 0; j < num; j++) {
                 _loop_2(j);
@@ -95,8 +62,33 @@ var Board = /** @class */ (function () {
         for (var i = 0; i < num; i++) {
             _loop_1(i);
         }
+        ;
         doc.appendChild(board);
     }
+    ;
+    Board.prototype.SetConbinatoions = function (x) {
+        switch (x) {
+            case 3:
+                this.kombinacje = [
+                    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                    [0, 4, 8], [2, 4, 6]
+                ];
+                console.log(this.kombinacje);
+                break;
+            case 4:
+                this.kombinacje = [
+                    [0, 1, 2], [1, 2, 3], [4, 5, 6], [5, 6, 7], [8, 9, 10],
+                    [9, 10, 11], [12, 13, 14], [13, 14, 15], [0, 4, 8], [1, 5, 9],
+                    [2, 6, 10], [3, 7, 11], [4, 8, 12], [5, 9, 13], [6, 10, 14],
+                    [7, 11, 15], [1, 6, 11], [0, 5, 10], [5, 10, 15], [4, 9, 14],
+                    [2, 5, 8], [3, 6, 9], [6, 9, 12], [7, 10, 13]
+                ];
+                console.log(this.kombinacje);
+                break;
+        }
+        ;
+    };
     ;
     Board.prototype.Check = function () {
         var _this = this;
@@ -114,16 +106,18 @@ var Board = /** @class */ (function () {
                 _this.zwyciezca = "Wygrał gracz drugi";
                 window.alert(_this.zwyciezca);
             }
-            if (moves["fa-circle-o"].length + moves["fa-times"].length == 9) {
+            if (moves["fa-circle-o"].length + moves["fa-times"].length == (_this.Size * _this.Size)) {
                 _this.zwyciezca = "Remis!";
                 window.alert(_this.zwyciezca);
             }
         });
         return this.zwyciezca;
     };
+    ;
     return Board;
 }());
 ;
-window.onload = function () {
-    var board = new Board(3);
-};
+var playGround = document.getElementById("playGround");
+var table = document.getElementById("table");
+document.getElementById("button3").onclick = function (e) { return new Board(3); };
+document.getElementById("button4").onclick = function (e) { return new Board(4); };
