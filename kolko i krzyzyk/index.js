@@ -3,6 +3,8 @@ var runda = 1;
 var listaRuchow = [
     "", "", "",
     "", "", "",
+    "", "", "", "", "", "",
+    "", "", "",
     "", "", ""
 ];
 var Cell = /** @class */ (function () {
@@ -14,7 +16,8 @@ var Cell = /** @class */ (function () {
     Cell.prototype.clickCell = function (e) {
         var gracz1 = "fa-times";
         var gracz2 = "fa-circle-o";
-        // if(listaRuchow[this.Num] !== "") return;
+        if (listaRuchow[this.Num] !== "")
+            return;
         var tura = runda % 2 === 0 ? gracz1 : gracz2;
         listaRuchow[this.Num] = tura;
         console.log(tura);
@@ -119,5 +122,5 @@ var Board = /** @class */ (function () {
 ;
 var playGround = document.getElementById("playGround");
 var table = document.getElementById("table");
-document.getElementById("button3").onclick = function (e) { return new Board(3); };
-document.getElementById("button4").onclick = function (e) { return new Board(4); };
+document.getElementById("button3").onclick = function (e) { return new Board(23); };
+document.getElementById("button4").onclick = function (e) { return new Board(400); };

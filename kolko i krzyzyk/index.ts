@@ -3,6 +3,8 @@ let runda = 1;
   const listaRuchow : Array<string> = [
   "" , "" , "" ,
   "" , "" , "" ,
+  "" , "" , "" ,  "" , "" , "" ,
+  "" , "" , "" ,
   "" , "" , "" 
  ];
 
@@ -20,7 +22,7 @@ public clickCell(e){
   const gracz1 ="fa-times";
   const gracz2 ="fa-circle-o";
 
-  // if(listaRuchow[this.Num] !== "") return;
+  if(listaRuchow[this.Num] !== "") return;
   const tura = runda % 2 === 0 ? gracz1 : gracz2 ;
   listaRuchow[this.Num] = tura;
 console.log(tura);
@@ -40,7 +42,7 @@ console.log(tura);
 class Board {
       Size : number;
       
-     constructor (num )
+     constructor (num :number)
      {
         this.Size = num;
 
@@ -133,5 +135,5 @@ class Board {
 };
  let playGround = document.getElementById("playGround");
  let table = document.getElementById("table")
- document.getElementById("button3").onclick = (e) => new Board(3);
- document.getElementById("button4").onclick = (e) => new Board(4);
+ document.getElementById("button3").onclick = (e) => new Board(23);
+ document.getElementById("button4").onclick = (e) => new Board(400);
