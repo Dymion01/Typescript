@@ -7,11 +7,6 @@ var FieldType;
     FieldType["selectBox"] = "select";
     FieldType["checkbox"] = "checkbox";
 })(FieldType || (FieldType = {}));
-var FieldLabel = /** @class */ (function () {
-    function FieldLabel() {
-    }
-    return FieldLabel;
-}());
 var InputField = /** @class */ (function () {
     function InputField(name, label) {
         this.element = document.createElement('input');
@@ -159,8 +154,40 @@ var CheckboxField = /** @class */ (function () {
     };
     return CheckboxField;
 }());
+var Form = /** @class */ (function () {
+    function Form(fields) {
+        this.form = document.createElement('form');
+        this.fields = fields;
+        for (var i = 0; i < fields.length; i++) {
+            this.form.appendChild(fields[i].GetLabel());
+            this.form.appendChild(fields[i].render());
+        }
+    }
+    Form.prototype.render = function () {
+        return this.form;
+    };
+    Form.prototype.getValue = function () {
+        for (var i = 0; i < this.fields.length; i++) {
+            // this.values.push( this.fields[i].getValue());
+            console.log(this.fields[i].getValue());
+        }
+        return this.values;
+    };
+    return Form;
+}());
 var names = new Array("Mary", "Tom", "Jack", "Jill");
-var s = new SelectField("aj", "hahahahahah", names);
+var s = new EmailField("email", "Email");
+var d = new InputField("input", "Input");
+var xd = new SelectField("select", "Select", names);
+var dq = new CheckboxField("checkbox", "Checkbox");
+var saaa = new DateField("date", "Data");
+var deee = new TextAreaField("textArea", "TextArea");
+var testfields = new Array(s, d, xd, dq, saaa, deee);
 var x = document.getElementById("test");
-x.appendChild(s.GetLabel());
-x.appendChild(s.render());
+var testForm = new Form(testfields);
+// x.appendChild(saaa.GetLabel() );
+// x.appendChild(saaa.render());
+x.appendChild(testForm.render());
+function TestLog() {
+    console.log(testForm.getValue());
+}

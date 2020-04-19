@@ -224,10 +224,49 @@ class CheckboxField implements Field {
     }
 
 }
-// var names:string[] = new Array("Mary","Tom","Jack","Jill")  
-// let s = new SelectField("aj" , "hahahahahah" ,  names);
 
-// let x = document.getElementById("test");
+class Form {
+    fields: Field[];
+    form: HTMLElement;
+    values: any[];
+    constructor(fields :Field[]){
+        this.form = <HTMLElement>document.createElement('form');
+        this.fields= fields;
+        for(let i =0 ; i<fields.length ; i++){
 
-// x.appendChild(s.GetLabel() );
-// x.appendChild(s.render());
+            this.form.appendChild(fields[i].GetLabel());
+            this.form.appendChild(fields[i].render());
+        }
+        
+    }
+    render() :HTMLElement{
+        return this.form;
+    }
+    getValue(): any[] {
+        
+        for(let i =0 ; i<this.fields.length ; i++){
+        // this.values.push( this.fields[i].getValue());
+        console.log(this.fields[i].getValue());
+        }
+        return this.values;
+    }
+}
+
+
+
+var names:string[] = new Array("Mary","Tom","Jack","Jill")  
+let s = new EmailField("email" , "Email" );
+let d = new InputField("input", "Input") ;
+let xd = new SelectField("select" , "Select" , names ) as Field;
+let dq = new CheckboxField("checkbox", "Checkbox") ;
+let saaa = new DateField("date" , "Data" );
+let deee = new TextAreaField("textArea", "TextArea") ;
+var testfields : Field[] = new Array(s,d,xd, dq ,saaa ,deee);
+let x = document.getElementById("test");
+let testForm = new Form(testfields);
+// x.appendChild(saaa.GetLabel() );
+// x.appendChild(saaa.render());
+x.appendChild(testForm.render());
+function TestLog(){
+    console.log(testForm.getValue());
+}
