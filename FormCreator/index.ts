@@ -21,6 +21,7 @@ interface Field {
     type: FieldType;
     render(): HTMLElement;
     getValue(): any;
+    GetLabel(): HTMLElement;
 }
 
 class InputField implements Field {
@@ -39,6 +40,13 @@ class InputField implements Field {
         this.element.type = this.type;
         
         
+    }   
+    GetLabel() : HTMLElement{
+        let labelElement: HTMLElement;
+        labelElement = <HTMLElement> document.createElement('LABEL');
+        labelElement.setAttribute("for", this.name);
+        labelElement.innerHTML =this.label;
+        return  labelElement;
     }
 
     render(): HTMLElement {
@@ -63,6 +71,13 @@ class TextAreaField implements Field {
         this.label = label;
         this.element.name =this.name;
         
+    }
+    GetLabel() : HTMLElement{
+        let labelElement: HTMLElement;
+        labelElement = <HTMLElement> document.createElement('LABEL');
+        labelElement.setAttribute("for", this.name);
+        labelElement.innerHTML =this.label;
+        return  labelElement;
     }
 
     render(): HTMLElement {
@@ -90,6 +105,13 @@ class DateField implements Field {
         this.element.type = this.type;
 
     }
+    GetLabel() : HTMLElement{
+        let labelElement: HTMLElement;
+        labelElement = <HTMLElement> document.createElement('LABEL');
+        labelElement.setAttribute("for", this.name);
+        labelElement.innerHTML =this.label;
+        return  labelElement;
+    }
 
     render(): HTMLElement {
         return this.element;
@@ -116,7 +138,13 @@ class EmailField implements Field {
         this.element.type = this.type;
 
     }
-
+     GetLabel() : HTMLElement{
+        let labelElement: HTMLElement;
+        labelElement = <HTMLElement> document.createElement('LABEL');
+        labelElement.setAttribute("for", this.name);
+        labelElement.innerHTML =this.label;
+        return  labelElement;
+    }
     render(): HTMLElement {
         return this.element;
     }
@@ -133,14 +161,26 @@ class SelectField implements Field {
     element: HTMLSelectElement;
 
 
-    constructor(name:string, label:string) {
+    constructor(name:string, label:string , arr:string[]) {
         this.element = <HTMLSelectElement>document.createElement('select');
         this.name = name;
         this.label = label;
         this.type= FieldType.selectBox;
         this.element.name =this.name;
+        for(let i=0; i <arr.length ;i++ ){
+            let option = <HTMLElement>document.createElement('option');
+            option.setAttribute("value" , arr[i]);
+            option.innerHTML = arr[i];
+            this.element.appendChild(option);
+        }
 
-
+    }
+    GetLabel() : HTMLElement{
+        let labelElement: HTMLElement;
+        labelElement = <HTMLElement> document.createElement('LABEL');
+        labelElement.setAttribute("for", this.name);
+        labelElement.innerHTML =this.label;
+        return  labelElement;
     }
 
     render(): HTMLElement {
@@ -167,6 +207,13 @@ class CheckboxField implements Field {
         this.element.type = this.type;
 
     }
+    GetLabel() : HTMLElement{
+        let labelElement: HTMLElement;
+        labelElement = <HTMLElement> document.createElement('LABEL');
+        labelElement.setAttribute("for", this.name);
+        labelElement.innerHTML =this.label;
+        return  labelElement;
+    }
 
     render(): HTMLElement {
         return this.element;
@@ -177,9 +224,10 @@ class CheckboxField implements Field {
     }
 
 }
+// var names:string[] = new Array("Mary","Tom","Jack","Jill")  
+// let s = new SelectField("aj" , "hahahahahah" ,  names);
 
-let s = new EmailField("aj" , "hahahahahah");
+// let x = document.getElementById("test");
 
-let x = document.getElementById("test");
-
-x.appendChild(s.render());
+// x.appendChild(s.GetLabel() );
+// x.appendChild(s.render());

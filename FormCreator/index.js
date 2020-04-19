@@ -7,6 +7,11 @@ var FieldType;
     FieldType["selectBox"] = "select";
     FieldType["checkbox"] = "checkbox";
 })(FieldType || (FieldType = {}));
+var FieldLabel = /** @class */ (function () {
+    function FieldLabel() {
+    }
+    return FieldLabel;
+}());
 var InputField = /** @class */ (function () {
     function InputField(name, label) {
         this.element = document.createElement('input');
@@ -16,6 +21,13 @@ var InputField = /** @class */ (function () {
         this.element.name = this.name;
         this.element.type = this.type;
     }
+    InputField.prototype.GetLabel = function () {
+        var labelElement;
+        labelElement = document.createElement('LABEL');
+        labelElement.setAttribute("for", this.name);
+        labelElement.innerHTML = this.label;
+        return labelElement;
+    };
     InputField.prototype.render = function () {
         return this.element;
     };
@@ -31,6 +43,13 @@ var TextAreaField = /** @class */ (function () {
         this.label = label;
         this.element.name = this.name;
     }
+    TextAreaField.prototype.GetLabel = function () {
+        var labelElement;
+        labelElement = document.createElement('LABEL');
+        labelElement.setAttribute("for", this.name);
+        labelElement.innerHTML = this.label;
+        return labelElement;
+    };
     TextAreaField.prototype.render = function () {
         return this.element;
     };
@@ -48,6 +67,13 @@ var DateField = /** @class */ (function () {
         this.element.name = this.name;
         this.element.type = this.type;
     }
+    DateField.prototype.GetLabel = function () {
+        var labelElement;
+        labelElement = document.createElement('LABEL');
+        labelElement.setAttribute("for", this.name);
+        labelElement.innerHTML = this.label;
+        return labelElement;
+    };
     DateField.prototype.render = function () {
         return this.element;
     };
@@ -65,6 +91,13 @@ var EmailField = /** @class */ (function () {
         this.element.name = this.name;
         this.element.type = this.type;
     }
+    EmailField.prototype.GetLabel = function () {
+        var labelElement;
+        labelElement = document.createElement('LABEL');
+        labelElement.setAttribute("for", this.name);
+        labelElement.innerHTML = this.label;
+        return labelElement;
+    };
     EmailField.prototype.render = function () {
         return this.element;
     };
@@ -74,13 +107,26 @@ var EmailField = /** @class */ (function () {
     return EmailField;
 }());
 var SelectField = /** @class */ (function () {
-    function SelectField(name, label) {
+    function SelectField(name, label, arr) {
         this.element = document.createElement('select');
         this.name = name;
         this.label = label;
         this.type = FieldType.selectBox;
         this.element.name = this.name;
+        for (var i = 0; i < arr.length; i++) {
+            var option = document.createElement('option');
+            option.setAttribute("value", arr[i]);
+            option.innerHTML = arr[i];
+            this.element.appendChild(option);
+        }
     }
+    SelectField.prototype.GetLabel = function () {
+        var labelElement;
+        labelElement = document.createElement('LABEL');
+        labelElement.setAttribute("for", this.name);
+        labelElement.innerHTML = this.label;
+        return labelElement;
+    };
     SelectField.prototype.render = function () {
         return this.element;
     };
@@ -98,6 +144,13 @@ var CheckboxField = /** @class */ (function () {
         this.type = FieldType.checkbox;
         this.element.type = this.type;
     }
+    CheckboxField.prototype.GetLabel = function () {
+        var labelElement;
+        labelElement = document.createElement('LABEL');
+        labelElement.setAttribute("for", this.name);
+        labelElement.innerHTML = this.label;
+        return labelElement;
+    };
     CheckboxField.prototype.render = function () {
         return this.element;
     };
@@ -106,6 +159,8 @@ var CheckboxField = /** @class */ (function () {
     };
     return CheckboxField;
 }());
-var s = new EmailField("aj", "hahahahahah");
+var names = new Array("Mary", "Tom", "Jack", "Jill");
+var s = new SelectField("aj", "hahahahahah", names);
 var x = document.getElementById("test");
+x.appendChild(s.GetLabel());
 x.appendChild(s.render());
