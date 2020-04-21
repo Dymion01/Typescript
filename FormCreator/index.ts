@@ -220,7 +220,7 @@ class CheckboxField implements Field {
         
     }
     getValue(): any {
-        return this.element.value
+        return this.element.checked;
     }
 
 }
@@ -229,6 +229,7 @@ class Form {
     fields: Field[];
     form: HTMLElement;
     values: any[];
+    comletedForm : HTMLElement;
     constructor(fields :Field[]){
         this.form = <HTMLElement>document.createElement('form');
         this.fields= fields;
@@ -242,13 +243,20 @@ class Form {
     render() :HTMLElement{
         return this.form;
     }
-    getValue(): any[] {
-        
+    getValue(): HTMLElement {
+        this.comletedForm = <HTMLElement>document.createElement('div');
+        this.comletedForm.classList.add("completedForm");
+
         for(let i =0 ; i<this.fields.length ; i++){
         // this.values.push( this.fields[i].getValue());
-        console.log(this.fields[i].getValue());
+        // console.log(this.fields[i].getValue());
+        let p = <HTMLElement>document.createElement('p');
+        p.classList.add("para");
+        p.innerHTML= this.fields[i].label + ": " + this.fields[i].getValue();
+        this.comletedForm.appendChild(p);
         }
-        return this.values;
+
+        return this.comletedForm;
     }
 }
 
@@ -267,6 +275,9 @@ let testForm = new Form(testfields);
 // x.appendChild(saaa.GetLabel() );
 // x.appendChild(saaa.render());
 x.appendChild(testForm.render());
+
+
+let completedFormDiv = document.getElementById("completedFormDiv");
 function TestLog(){
-    console.log(testForm.getValue());
+   completedFormDiv.appendChild( testForm.getValue());
 }

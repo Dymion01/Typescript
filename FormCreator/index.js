@@ -150,7 +150,7 @@ var CheckboxField = /** @class */ (function () {
         return this.element;
     };
     CheckboxField.prototype.getValue = function () {
-        return this.element.value;
+        return this.element.checked;
     };
     return CheckboxField;
 }());
@@ -167,11 +167,17 @@ var Form = /** @class */ (function () {
         return this.form;
     };
     Form.prototype.getValue = function () {
+        this.comletedForm = document.createElement('div');
+        this.comletedForm.classList.add("completedForm");
         for (var i = 0; i < this.fields.length; i++) {
             // this.values.push( this.fields[i].getValue());
-            console.log(this.fields[i].getValue());
+            // console.log(this.fields[i].getValue());
+            var p = document.createElement('p');
+            p.classList.add("para");
+            p.innerHTML = this.fields[i].label + ": " + this.fields[i].getValue();
+            this.comletedForm.appendChild(p);
         }
-        return this.values;
+        return this.comletedForm;
     };
     return Form;
 }());
@@ -188,6 +194,7 @@ var testForm = new Form(testfields);
 // x.appendChild(saaa.GetLabel() );
 // x.appendChild(saaa.render());
 x.appendChild(testForm.render());
+var completedFormDiv = document.getElementById("completedFormDiv");
 function TestLog() {
-    console.log(testForm.getValue());
+    completedFormDiv.appendChild(testForm.getValue());
 }
