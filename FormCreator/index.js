@@ -170,8 +170,6 @@ var Form = /** @class */ (function () {
         this.comletedForm = document.createElement('div');
         this.comletedForm.classList.add("completedForm");
         for (var i = 0; i < this.fields.length; i++) {
-            // this.values.push( this.fields[i].getValue());
-            // console.log(this.fields[i].getValue());
             var p = document.createElement('p');
             p.classList.add("para");
             p.innerHTML = this.fields[i].label + ": " + this.fields[i].getValue();
@@ -181,20 +179,112 @@ var Form = /** @class */ (function () {
     };
     return Form;
 }());
-var names = new Array("Mary", "Tom", "Jack", "Jill");
-var s = new EmailField("email", "Email");
-var d = new InputField("input", "Input");
-var xd = new SelectField("select", "Select", names);
-var dq = new CheckboxField("checkbox", "Checkbox");
-var saaa = new DateField("date", "Data");
-var deee = new TextAreaField("textArea", "TextArea");
-var testfields = new Array(s, d, xd, dq, saaa, deee);
+var FormMaker = /** @class */ (function () {
+    function FormMaker() {
+        var _this = this;
+        this.arr = ["InputField", "EmailField", "SelectField", "CheckboxField", "DateField", "TextAreaField"];
+        this.formFields = [];
+        this.formMaker = document.createElement('form');
+        this.formMaker.classList.add('formMaker');
+        var makerText = document.createElement('p');
+        makerText.innerHTML = " Choose and make element of Form ";
+        this.makerChooseElem = document.createElement('select');
+        for (var i = 0; i < this.arr.length; i++) {
+            var option = document.createElement('option');
+            option.setAttribute("value", this.arr[i]);
+            option.innerHTML = this.arr[i];
+            this.makerChooseElem.appendChild(option);
+        }
+        this.makerChooseElem.addEventListener("change", function () { return _this.AddSelectOptions(); });
+        this.makerElemName = document.createElement('input');
+        this.makerElemName.setAttribute("placeholder", "Name");
+        this.MakerElemLabel = document.createElement('input');
+        this.MakerElemLabel.setAttribute("placeholder", "Label");
+        this.formMaker.appendChild(makerText);
+        this.formMaker.appendChild(this.makerChooseElem);
+        this.formMaker.appendChild(this.makerElemName);
+        this.formMaker.appendChild(this.MakerElemLabel);
+        // let makerButton = <HTMLElement>document.createElement('button')
+        // makerButton.addEventListener( "click", this.AddElem);
+        // this.formMaker.appendChild(makerButton);
+        //niewiadomo czemu powyższy kod nie działa
+    }
+    FormMaker.prototype.AddSelectOptions = function () {
+        console.log(this.makerChooseElem.value);
+        if (this.makerChooseElem.value == "SelectField") {
+            this.makerSelectOptionsInput = document.createElement("input");
+            this.makerSelectOptionsInput.setAttribute("placeholder", "Select Options ");
+            this.formMaker.appendChild(this.makerSelectOptionsInput);
+        }
+        else
+            this.formMaker.removeChild(this.makerSelectOptionsInput);
+    };
+    FormMaker.prototype.AddElem = function () {
+        console.log(this);
+        switch (this.makerChooseElem.value) {
+            case "InputField":
+                var input = new InputField(this.makerElemName.value, this.MakerElemLabel.value);
+                this.formFields.push(input);
+                break;
+            case "EmailField":
+                var email = new EmailField(this.makerElemName.value, this.MakerElemLabel.value);
+                this.formFields.push(email);
+                break;
+            case "CheckboxField":
+                var checkbox = new CheckboxField(this.makerElemName.value, this.MakerElemLabel.value);
+                this.formFields.push(checkbox);
+                break;
+            case "DateField":
+                var date = new DateField(this.makerElemName.value, this.MakerElemLabel.value);
+                this.formFields.push(date);
+                break;
+            case "TextAreaField":
+                var textarea = new TextAreaField(this.makerElemName.value, this.MakerElemLabel.value);
+                this.formFields.push(textarea);
+                break;
+            case "SelectField":
+                this.formSelectArray = this.makerSelectOptionsInput.value.split(", ");
+                var select = new SelectField(this.makerElemName.value, this.MakerElemLabel.value, this.formSelectArray);
+                this.formFields.push(select);
+        }
+    };
+    FormMaker.prototype.GetMaker = function () {
+        return this.formMaker;
+    };
+    FormMaker.prototype.MakeForm = function () {
+        this.form = new Form(this.formFields);
+        return this.form;
+    };
+    return FormMaker;
+}());
+// var names:string[] = new Array("Mary","Tom","Jack","Jill")  
+// let s = new EmailField("email" , "Email" );
+// let d = new InputField("input", "Input") ;
+// let xd = new SelectField("select" , "Select" , names ) as Field;
+// let dq = new CheckboxField("checkbox", "Checkbox") ;
+// let saaa = new DateField("date" , "Data" );
+// let deee = new TextAreaField("textArea", "TextArea") ;
+// var testfields : Field[] = new Array(s,d,xd, dq ,saaa ,deee);
+// let x = document.getElementById("test");
+// let testForm = new Form(testfields);
+// // x.appendChild(saaa.GetLabel() );
+// // x.appendChild(saaa.render());
+// x.appendChild(testForm.render());
+// let completedFormDiv = document.getElementById("completedFormDiv");
+// function TestLog(){
+//    completedFormDiv.appendChild(testForm.getValue());
+// }
 var x = document.getElementById("test");
-var testForm = new Form(testfields);
-// x.appendChild(saaa.GetLabel() );
-// x.appendChild(saaa.render());
-x.appendChild(testForm.render());
-var completedFormDiv = document.getElementById("completedFormDiv");
+var formMaker = new FormMaker();
+x.appendChild(formMaker.GetMaker());
 function TestLog() {
-    completedFormDiv.appendChild(testForm.getValue());
+    formMaker.AddElem();
+    console.log(formMaker.formFields);
+}
+function MakeForm() {
+    x.appendChild(formMaker.MakeForm().render());
+}
+var completedFormDiv = document.getElementById("completedFormDiv");
+function MakeAnswer() {
+    completedFormDiv.appendChild(formMaker.form.getValue());
 }
