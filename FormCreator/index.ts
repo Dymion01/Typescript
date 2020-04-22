@@ -238,6 +238,9 @@ class Form {
             this.form.appendChild(fields[i].GetLabel());
             this.form.appendChild(fields[i].render());
         }
+        // let makerButton = <HTMLElement>document.createElement('button')
+        //  makerButton.addEventListener( "click", this.getValue);
+        //  this.form.appendChild(makerButton);
         
     }
     render() :HTMLElement{

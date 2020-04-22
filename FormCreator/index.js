@@ -162,6 +162,9 @@ var Form = /** @class */ (function () {
             this.form.appendChild(fields[i].GetLabel());
             this.form.appendChild(fields[i].render());
         }
+        var makerButton = document.createElement('button');
+        makerButton.addEventListener("click", this.getValue);
+        this.form.appendChild(makerButton);
     }
     Form.prototype.render = function () {
         return this.form;
