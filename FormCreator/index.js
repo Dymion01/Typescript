@@ -156,15 +156,18 @@ var CheckboxField = /** @class */ (function () {
 }());
 var Form = /** @class */ (function () {
     function Form(fields) {
+        var _this = this;
         this.form = document.createElement('form');
         this.fields = fields;
         for (var i = 0; i < fields.length; i++) {
             this.form.appendChild(fields[i].GetLabel());
             this.form.appendChild(fields[i].render());
         }
-        var makerButton = document.createElement('button');
-        makerButton.addEventListener("click", this.getValue);
-        this.form.appendChild(makerButton);
+        var addInstOfFormBtn = document.createElement("input");
+        addInstOfFormBtn.type = "button";
+        addInstOfFormBtn.value = "Take the survey";
+        addInstOfFormBtn.onclick = function () { return _this.getValue(); };
+        this.form.appendChild(addInstOfFormBtn);
     }
     Form.prototype.render = function () {
         return this.form;
@@ -178,6 +181,8 @@ var Form = /** @class */ (function () {
             p.innerHTML = this.fields[i].label + ": " + this.fields[i].getValue();
             this.comletedForm.appendChild(p);
         }
+        var completedFormDiv = document.getElementById("completedFormDiv");
+        completedFormDiv.appendChild(this.comletedForm);
         return this.comletedForm;
     };
     return Form;
@@ -207,10 +212,16 @@ var FormMaker = /** @class */ (function () {
         this.formMaker.appendChild(this.makerChooseElem);
         this.formMaker.appendChild(this.makerElemName);
         this.formMaker.appendChild(this.MakerElemLabel);
-        // let makerButton = <HTMLElement>document.createElement('button')
-        // makerButton.addEventListener( "click", this.AddElem);
-        // this.formMaker.appendChild(makerButton);
-        //niewiadomo czemu powyższy kod nie działa
+        var makerButton = document.createElement('input');
+        makerButton.type = "button";
+        makerButton.value = "Ddd to form";
+        makerButton.onclick = function () { return _this.AddElem(); };
+        this.formMaker.appendChild(makerButton);
+        var MakeFormButton = document.createElement("input");
+        MakeFormButton.type = "button";
+        MakeFormButton.value = "Make a form!";
+        MakeFormButton.onclick = function () { return _this.MakeForm(); };
+        this.formMaker.appendChild(MakeFormButton);
     }
     FormMaker.prototype.AddSelectOptions = function () {
         console.log(this.makerChooseElem.value);
@@ -255,11 +266,15 @@ var FormMaker = /** @class */ (function () {
         return this.formMaker;
     };
     FormMaker.prototype.MakeForm = function () {
+        var x = document.getElementById("test");
         this.form = new Form(this.formFields);
-        return this.form;
+        x.appendChild(this.form.render());
     };
     return FormMaker;
 }());
+var x = document.getElementById("test");
+var formMaker = new FormMaker();
+x.appendChild(formMaker.GetMaker());
 // var names:string[] = new Array("Mary","Tom","Jack","Jill")  
 // let s = new EmailField("email" , "Email" );
 // let d = new InputField("input", "Input") ;
@@ -277,17 +292,14 @@ var FormMaker = /** @class */ (function () {
 // function TestLog(){
 //    completedFormDiv.appendChild(testForm.getValue());
 // }
-var x = document.getElementById("test");
-var formMaker = new FormMaker();
-x.appendChild(formMaker.GetMaker());
-function TestLog() {
-    formMaker.AddElem();
-    console.log(formMaker.formFields);
-}
-function MakeForm() {
-    x.appendChild(formMaker.MakeForm().render());
-}
-var completedFormDiv = document.getElementById("completedFormDiv");
-function MakeAnswer() {
-    completedFormDiv.appendChild(formMaker.form.getValue());
-}
+// function TestLog(){
+//     formMaker.AddElem();
+//     console.log(formMaker.formFields);
+// }
+// function MakeForm(){
+//   x.appendChild(formMaker.MakeForm().render());
+// }
+// let completedFormDiv = document.getElementById("completedFormDiv");
+// function MakeAnswer(){
+//    completedFormDiv.appendChild(formMaker.form.getValue());
+// }

@@ -238,10 +238,13 @@ class Form {
             this.form.appendChild(fields[i].GetLabel());
             this.form.appendChild(fields[i].render());
         }
-        // let makerButton = <HTMLElement>document.createElement('button')
-        //  makerButton.addEventListener( "click", this.getValue);
-        //  this.form.appendChild(makerButton);
-        
+        let addInstOfFormBtn = <HTMLInputElement>document.createElement("input");
+        addInstOfFormBtn.type = "button";
+        addInstOfFormBtn.value = "Take the survey";
+        addInstOfFormBtn.onclick = () => this.getValue();
+        this.form.appendChild(addInstOfFormBtn);
+
+
     }
     render() :HTMLElement{
         return this.form;
@@ -256,7 +259,8 @@ class Form {
         p.innerHTML= this.fields[i].label + ": " + this.fields[i].getValue();
         this.comletedForm.appendChild(p);
         }
-
+        let completedFormDiv = document.getElementById("completedFormDiv");
+        completedFormDiv.appendChild(this.comletedForm);
         return this.comletedForm;
     }
 }
@@ -297,10 +301,18 @@ class FormMaker{
         this.formMaker.appendChild(this.makerElemName);
         this.formMaker.appendChild(this.MakerElemLabel);
         
-        // let makerButton = <HTMLElement>document.createElement('button')
-        // makerButton.addEventListener( "click", this.AddElem);
-        // this.formMaker.appendChild(makerButton);
-        //niewiadomo czemu powyższy kod nie działa
+        let makerButton = <HTMLInputElement>document.createElement('input')
+        makerButton.type = "button";
+        makerButton.value = "Ddd to form";
+        makerButton.onclick = () => this.AddElem();
+        this.formMaker.appendChild(makerButton);
+
+        let MakeFormButton = <HTMLInputElement>document.createElement("input");
+        MakeFormButton.type = "button";
+        MakeFormButton.value = "Make a form!";
+        MakeFormButton.onclick = () => this.MakeForm();
+        this.formMaker.appendChild(MakeFormButton);
+
     }
     AddSelectOptions(){
         console.log(this.makerChooseElem.value);
@@ -348,11 +360,16 @@ class FormMaker{
         return this.formMaker;
     }
     MakeForm(){
+        let x = document.getElementById("test");
         this.form = new Form(this.formFields);
-        return this.form
+
+        x.appendChild(this.form.render());
     }   
 
 }
+let x = document.getElementById("test");
+let formMaker = new FormMaker();
+x.appendChild(formMaker.GetMaker());
 
 // var names:string[] = new Array("Mary","Tom","Jack","Jill")  
 // let s = new EmailField("email" , "Email" );
@@ -374,18 +391,16 @@ class FormMaker{
 //    completedFormDiv.appendChild(testForm.getValue());
 // }
 
- let x = document.getElementById("test");
-let formMaker = new FormMaker();
-x.appendChild(formMaker.GetMaker());
-function TestLog(){
-    formMaker.AddElem();
-    console.log(formMaker.formFields);
+
+// function TestLog(){
+//     formMaker.AddElem();
+//     console.log(formMaker.formFields);
     
-}
-function MakeForm(){
-  x.appendChild(formMaker.MakeForm().render());
-}
-let completedFormDiv = document.getElementById("completedFormDiv");
-function MakeAnswer(){
-   completedFormDiv.appendChild(formMaker.form.getValue());
-}
+// }
+// function MakeForm(){
+//   x.appendChild(formMaker.MakeForm().render());
+// }
+// let completedFormDiv = document.getElementById("completedFormDiv");
+// function MakeAnswer(){
+//    completedFormDiv.appendChild(formMaker.form.getValue());
+// }
