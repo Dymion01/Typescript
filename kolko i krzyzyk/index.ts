@@ -135,5 +135,5 @@ class Board {
 };
  let playGround = document.getElementById("playGround");
  let table = document.getElementById("table")
- document.getElementById("button3").onclick = (e) => new Board(23);
- document.getElementById("button4").onclick = (e) => new Board(400);
+ document.getElementById("button3").onclick = (e) => new Board(3);
+ document.getElementById("button4").onclick = (e) => new Board(4);

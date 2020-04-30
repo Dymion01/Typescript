@@ -122,5 +122,5 @@ var Board = /** @class */ (function () {
 ;
 var playGround = document.getElementById("playGround");
 var table = document.getElementById("table");
-document.getElementById("button3").onclick = function (e) { return new Board(23); };
-document.getElementById("button4").onclick = function (e) { return new Board(400); };
+document.getElementById("button3").onclick = function (e) { return new Board(3); };
+document.getElementById("button4").onclick = function (e) { return new Board(4); };
