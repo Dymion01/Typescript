@@ -1,4 +1,7 @@
 import {FormMaker} from './FormMaker';
+import {MyLocalStorage} from './LocalStorage';
+let q = new MyLocalStorage();
+q.render();
 let x = document.getElementById("test");
 let formMaker = new FormMaker();
 x.appendChild(formMaker.GetMaker());

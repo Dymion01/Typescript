@@ -24,6 +24,7 @@ import {Field} from './Field';
     getValue(): HTMLElement {
         this.comletedForm = <HTMLElement>document.createElement('div');
         this.comletedForm.classList.add("completedForm");
+        this.comletedForm.id = Date.now().toString();
         for (let i = 0; i < this.fields.length; i++) {
             let p = <HTMLElement>document.createElement('p');
             p.classList.add("para");
@@ -32,6 +33,9 @@ import {Field} from './Field';
         }
         let completedFormDiv = document.getElementById("completedFormDiv");
         completedFormDiv.appendChild(this.comletedForm);
+        localStorage.setItem(this.comletedForm.id , JSON.stringify($(this.form).serializeArray()));
+        console.log(localStorage);
         return this.comletedForm;
     }
 }
+//$(this.form).serializeArray())

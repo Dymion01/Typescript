@@ -52,7 +52,8 @@ import {CheckboxField} from './CheckboxField';
         if (this.makerChooseElem.value == "SelectField") {
             this.makerSelectOptionsInput = <HTMLInputElement>document.createElement("input");
             this.makerSelectOptionsInput.setAttribute("placeholder", "Select Options ");
-            this.formMaker.appendChild(this.makerSelectOptionsInput);
+            // this.formMaker.appendChild(this.makerSelectOptionsInput);
+            this.formMaker.insertBefore(this.makerSelectOptionsInput , this.MakerElemLabel.nextSibling);
         }
         else
             this.formMaker.removeChild(this.makerSelectOptionsInput);
