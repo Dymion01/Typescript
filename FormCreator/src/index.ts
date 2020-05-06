@@ -1,6 +1,7 @@
 import {FormMaker} from './FormMaker';
 import {MyLocalStorage} from './LocalStorage';
 let q = new MyLocalStorage();
+// document.onload= () => q.render();
 q.render();
 let x = document.getElementById("test");
 let formMaker = new FormMaker();
