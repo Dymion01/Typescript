@@ -24,14 +24,26 @@ import {Field} from './Field';
     getValue(): HTMLElement {
         this.comletedForm = <HTMLElement>document.createElement('div');
         this.comletedForm.classList.add("completedForm");
+        let completedFormDiv = document.getElementById("completedFormDiv");
         this.comletedForm.id = Date.now().toString();
+        let deleteBtn = <HTMLElement>document.createElement('button');
+        
+        deleteBtn.onclick = () =>{
+            
+            let toRemove = document.getElementById(this.comletedForm.id);
+            completedFormDiv.removeChild(toRemove);
+            localStorage.removeItem(this.comletedForm.id);
+
+        }
+        this.comletedForm.appendChild(deleteBtn);
         for (let i = 0; i < this.fields.length; i++) {
             let p = <HTMLElement>document.createElement('p');
             p.classList.add("para");
             p.innerHTML = this.fields[i].label + ": " + this.fields[i].getValue();
             this.comletedForm.appendChild(p);
+            
         }
-        let completedFormDiv = document.getElementById("completedFormDiv");
+        
         completedFormDiv.appendChild(this.comletedForm);
         localStorage.setItem(this.comletedForm.id , JSON.stringify($(this.form).serializeArray()));
         console.log(localStorage);

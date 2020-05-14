@@ -1,5 +1,7 @@
 {
     "compilerOptions": {
-      "outDir": "./dist/"
+      "outDir": "./dist/",
+      "experimentalDecorators": true,
+      "target":"ES5"
     }
   }

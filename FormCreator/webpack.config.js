@@ -1,7 +1,11 @@
 const webpack = require('webpack');
 const path = require('path');
-const config = {
-  entry: './src/index.ts',
+const WebConfig = {
+  entry: {
+   'boundle': './src/index.ts',
+   'client': './src/client.ts',
+
+  },
   module: {
     rules: [
       {
@@ -16,7 +20,30 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'index.js'
+    filename: '[name].js'
   }
 };
-module.exports = config;
+const ServerConifg = {
+  devtool: "sourcemap",
+  entry: {
+    "server": './src/server.ts'
+  },
+  target: "node",
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+    ],
+  },
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ],
+  },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js'
+  }
+}
+module.exports = [WebConfig ,ServerConifg]

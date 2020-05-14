@@ -18,6 +18,19 @@ export class MyLocalStorage {
       console.log(arr);
       let completedForm = <HTMLElement>document.createElement('div');
       completedForm.classList.add("completedForm");
+      completedForm.id=localStorage.key(i);
+      let deleteBtn = <HTMLElement>document.createElement('button');
+        
+      deleteBtn.onclick = () =>{
+        console.log(localStorage.key(i));
+          let toRemove = document.getElementById(localStorage.key(i));
+          completedFormDiv.removeChild(toRemove);
+          
+
+          localStorage.removeItem(localStorage.key(i));
+
+      }
+      completedForm.appendChild(deleteBtn);
       for (let j = 0 ; j< arr.length ; j++){
         let obj = arr[j];
         let p = <HTMLElement>document.createElement('p');
