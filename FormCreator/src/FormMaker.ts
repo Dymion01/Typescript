@@ -5,12 +5,13 @@ import {SelectField} from './SelectField';
 import {TextAreaField} from './TextAreaField';
 import {DateField} from './DateField';
 import {CheckboxField} from './CheckboxField';
+import {ExtendedSelectField} from './ExtendedSelectField';
  export class FormMaker {
     makerChooseElem: HTMLSelectElement;
     makerElemName: HTMLInputElement;
     MakerElemLabel: HTMLInputElement;
     formMaker: HTMLElement;
-    arr = ["InputField", "EmailField", "SelectField", "CheckboxField", "DateField", "TextAreaField"];
+    arr = ["InputField", "EmailField", "SelectField", "ExtendedSelectField","CheckboxField", "DateField", "TextAreaField"];
     formFields = [];
     makerSelectOptionsInput: HTMLInputElement;
     formSelectArray: string[];
@@ -55,6 +56,7 @@ import {CheckboxField} from './CheckboxField';
             // this.formMaker.appendChild(this.makerSelectOptionsInput);
             this.formMaker.insertBefore(this.makerSelectOptionsInput , this.MakerElemLabel.nextSibling);
         }
+        
         else
             this.formMaker.removeChild(this.makerSelectOptionsInput);
     }
@@ -85,6 +87,11 @@ import {CheckboxField} from './CheckboxField';
                 this.formSelectArray = this.makerSelectOptionsInput.value.split(", ");
                 let select = new SelectField(this.makerElemName.value, this.MakerElemLabel.value, this.formSelectArray);
                 this.formFields.push(select);
+                break;
+            case "ExtendedSelectField":
+                let extendedSelect = new ExtendedSelectField(this.makerElemName.value , this.MakerElemLabel.value)
+                this.formFields.push(extendedSelect);
+                break;
         }
     }
     GetMaker() {

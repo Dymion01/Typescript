@@ -1,5 +1,6 @@
 import {FormMaker} from './FormMaker';
 import {MyLocalStorage} from './LocalStorage';
+import './styles/styles.scss';
 let q = new MyLocalStorage();
 // document.onload= () => q.render();
 q.render();

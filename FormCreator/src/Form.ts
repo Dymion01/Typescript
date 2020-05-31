@@ -1,3 +1,4 @@
+import {socket} from '../src/client'
 
 import {Field} from './Field';
  export class Form {
@@ -11,6 +12,7 @@ import {Field} from './Field';
         for (let i = 0; i < fields.length; i++) {
             this.form.appendChild(fields[i].GetLabel());
             this.form.appendChild(fields[i].render());
+            
         }
         let addInstOfFormBtn = <HTMLInputElement>document.createElement("input");
         addInstOfFormBtn.type = "button";
@@ -27,7 +29,7 @@ import {Field} from './Field';
         let completedFormDiv = document.getElementById("completedFormDiv");
         this.comletedForm.id = Date.now().toString();
         let deleteBtn = <HTMLElement>document.createElement('button');
-        
+        deleteBtn.innerHTML ="Remove"
         deleteBtn.onclick = () =>{
             
             let toRemove = document.getElementById(this.comletedForm.id);
@@ -36,6 +38,7 @@ import {Field} from './Field';
 
         }
         this.comletedForm.appendChild(deleteBtn);
+
         for (let i = 0; i < this.fields.length; i++) {
             let p = <HTMLElement>document.createElement('p');
             p.classList.add("para");
@@ -45,9 +48,10 @@ import {Field} from './Field';
         }
         
         completedFormDiv.appendChild(this.comletedForm);
+
+        socket.send(this.comletedForm.id +"&"+ JSON.stringify($(this.form).serializeArray()));
         localStorage.setItem(this.comletedForm.id , JSON.stringify($(this.form).serializeArray()));
         console.log(localStorage);
         return this.comletedForm;
     }
 }
-//$(this.form).serializeArray())

@@ -20,6 +20,7 @@ export class InputField implements Field {
         this.type = FieldType.inputBox;
         this.element.name = this.name;
         this.element.type = this.type;
+        this.element.classList.add('field');
     }
     @LogMethod
     GetLabel(): HTMLElement {
@@ -27,6 +28,7 @@ export class InputField implements Field {
         labelElement = <HTMLElement>document.createElement('LABEL');
         labelElement.setAttribute("for", this.name);
         labelElement.innerHTML = this.label;
+        labelElement.classList.add('label')
         return labelElement;
     }
     @LogMethod

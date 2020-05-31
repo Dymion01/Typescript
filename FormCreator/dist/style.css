@@ -1,4 +1,4 @@
-#test{
+/* #test{
     width: 100px;
     height: 300px;
     border: 1px black;
@@ -9,9 +9,11 @@
     
 }
 .para{
-    border: 1px chocolate;
+
+    border: 10px blue;
     
 }
+
 #testbutton{
     width: 50px;
     height: 50px;
@@ -28,4 +30,4 @@
 #completedFormDiv{
     position: relative;
     display: flex;
-}
+} */
