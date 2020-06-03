@@ -1,9 +1,14 @@
 @import 'theme.light';
-body {
-    color: $body-color;
-  }
-
-
+@import 'themes';
+@import 'mixins';
+.appContainer{
+    display: flex;
+    @include themify($themes) {
+        color: themed('textColor');  
+        background-color: themed('backgroundColor');  
+      }
+}
+// stare niżej 
 #test{
     width: 100px;
     height: 300px;

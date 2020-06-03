@@ -98,7 +98,7 @@ import {ExtendedSelectField} from './ExtendedSelectField';
         return this.formMaker;
     }
     MakeForm() {
-        let x = document.getElementById("test");
+        let x = document.getElementById("formDiv");
         this.form = new Form(this.formFields);
         x.appendChild(this.form.render());
     }

@@ -4,7 +4,7 @@ import './styles/styles.scss';
 let q = new MyLocalStorage();
 // document.onload= () => q.render();
 q.render();
-let x = document.getElementById("test");
+let x = document.getElementById("formMakerDiv");
 let formMaker = new FormMaker();
 x.appendChild(formMaker.GetMaker());
 
