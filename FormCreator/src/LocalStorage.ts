@@ -16,16 +16,18 @@ export class MyLocalStorage {
       
       let arr = (JSON.parse(localStorage.getItem(localStorage.key(i))));
       console.log(arr);
+      let id = localStorage.key(i);
       let completedForm = <HTMLElement>document.createElement('div');
       completedForm.classList.add("completedForm");
       completedForm.id=localStorage.key(i);
       let deleteBtn = <HTMLElement>document.createElement('button');
-        
+        deleteBtn.innerText="Remove"
       deleteBtn.onclick = () =>{
         console.log(localStorage.key(i));
-          let toRemove = document.getElementById(localStorage.key(i));
+          let toRemove = document.getElementById(id);
+          console.log(toRemove);
           completedFormDiv.removeChild(toRemove);
-          
+          console.log(completedFormDiv)
 
           localStorage.removeItem(localStorage.key(i));
 
@@ -44,11 +46,7 @@ export class MyLocalStorage {
 
     }
 
-    //działa ale z kei getitem itp 
-    // for (var x in localStorage){
-    //     console.log(x);
-    //    console.log(JSON.parse(localStorage.getItem(x)));
-    // }
+  
     
 
 

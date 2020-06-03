@@ -5,7 +5,7 @@ import {Field} from './Field';
     fields: Field[];
     form: HTMLElement;
     values: any[];
-    comletedForm: HTMLElement;
+    
     constructor(fields: Field[]) {
         this.form = <HTMLElement>document.createElement('form');
         this.fields = fields;
@@ -24,34 +24,37 @@ import {Field} from './Field';
         return this.form;
     }
     getValue(): HTMLElement {
-        this.comletedForm = <HTMLElement>document.createElement('div');
-        this.comletedForm.classList.add("completedForm");
+        let comletedForm = <HTMLElement>document.createElement('div');
+        comletedForm.classList.add("completedForm");
         let completedFormDiv = document.getElementById("completedFormDiv");
-        this.comletedForm.id = Date.now().toString();
+        comletedForm.id = Date.now().toString();
         let deleteBtn = <HTMLElement>document.createElement('button');
         deleteBtn.innerHTML ="Remove"
         deleteBtn.onclick = () =>{
-            
-            let toRemove = document.getElementById(this.comletedForm.id);
-            completedFormDiv.removeChild(toRemove);
-            localStorage.removeItem(this.comletedForm.id);
+            let container = document.getElementById("completedFormDiv");
+            let toRemove = document.getElementById(comletedForm.id);
+            console.log(toRemove)
+            container.removeChild(toRemove);
+            localStorage.removeItem(comletedForm.id);
+            console.log(container);
+        
 
         }
-        this.comletedForm.appendChild(deleteBtn);
+        comletedForm.appendChild(deleteBtn);
 
         for (let i = 0; i < this.fields.length; i++) {
             let p = <HTMLElement>document.createElement('p');
             p.classList.add("para");
             p.innerHTML = this.fields[i].label + ": " + this.fields[i].getValue();
-            this.comletedForm.appendChild(p);
+            comletedForm.appendChild(p);
             
         }
         
-        completedFormDiv.appendChild(this.comletedForm);
+        completedFormDiv.appendChild(comletedForm);
 
-        socket.send(this.comletedForm.id +"&"+ JSON.stringify($(this.form).serializeArray()));
-        localStorage.setItem(this.comletedForm.id , JSON.stringify($(this.form).serializeArray()));
+        socket.send(JSON.stringify($(this.form).serializeArray()));
+        localStorage.setItem(comletedForm.id , JSON.stringify($(this.form).serializeArray()));
         console.log(localStorage);
-        return this.comletedForm;
+        return comletedForm;
     }
 }

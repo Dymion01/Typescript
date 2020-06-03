@@ -27,15 +27,7 @@ export class ExtendedSelectField implements Field {
             
         }
         this.all.appendChild(this.regionselect);
-        // this.fetchOptions<{name: string , region:string}>("https://restcountries.eu/rest/v2/all").then((data) => {
-        //     data.filter(q => q.region == this.regionselect.value).
-        //     map(x=>x.name).forEach(element => {
-        //         let option = <HTMLOptionElement>document.createElement("option");
-        //         option.text = element;
-        //         option.value = element;
-        //         this.element.options.add(option);
-        //     })
-        // });
+
         this.fetchOptions<{name: string , region:string}>("https://restcountries.eu/rest/v2/all").then((data) => {
             data.filter(q => q.region == "Asia").
             map(x=>x.name).forEach(element => {
@@ -45,23 +37,21 @@ export class ExtendedSelectField implements Field {
                 this.element.options.add(option);
                 
             })
-        });     console.log(this.element.options);
+        });    
+        console.log(this.element.options);
+ 
         this.all.appendChild(this.element);
     }
     filteredSelect()  {
-        console.log(this.element.options);
-        console.log(this.element.options[0]);
-        console.log(this.element.options[1]);
-        console.log(this.element.options[2]);
 
-        for(let i =0; i<this.element.options.length; i++)
-        {
-            console.log(i);
-            
-            
-        this.element.options.remove(i);
+        // for(let i =0; i<this.element.options.length; i++)
+        // {
+
+        //     console.log(this.element.options[i]);
+        // this.element.options.remove(i);
         
-        }
+       // }
+        this.element.innerText = null;
         console.log(this.element.options.length);
         this.fetchOptions<{name: string , region:string}>("https://restcountries.eu/rest/v2/all").then((data) => {
             data.filter(q => q.region == this.regionselect.value).
