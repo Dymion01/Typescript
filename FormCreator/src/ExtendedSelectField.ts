@@ -18,7 +18,7 @@ export class ExtendedSelectField implements Field {
         this.regionselect = <HTMLSelectElement>document.createElement('select');
         this.regionselect.setAttribute("placeholder", "Select region ");
         // this.regionselect.addEventListener('change', this.filteredSelect);
-            this.regionselect.onchange = () => {this.filteredSelect()};
+            this.regionselect.onchange = () => this.filteredSelect();
         for (let i = 0; i < this.regions.length; i++) {
             let option = <HTMLElement>document.createElement('option');
             option.setAttribute("value", this.regions[i]);
@@ -44,14 +44,8 @@ export class ExtendedSelectField implements Field {
     }
     filteredSelect()  {
 
-        // for(let i =0; i<this.element.options.length; i++)
-        // {
-
-        //     console.log(this.element.options[i]);
-        // this.element.options.remove(i);
-        
-       // }
         this.element.innerText = null;
+
         console.log(this.element.options.length);
         this.fetchOptions<{name: string , region:string}>("https://restcountries.eu/rest/v2/all").then((data) => {
             data.filter(q => q.region == this.regionselect.value).

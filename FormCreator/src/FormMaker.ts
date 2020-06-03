@@ -20,6 +20,7 @@ import {ExtendedSelectField} from './ExtendedSelectField';
         this.formMaker = <HTMLElement>document.createElement('form');
         this.formMaker.classList.add('formMaker');
         let makerText = <HTMLElement>document.createElement('p');
+            makerText.classList.add('makerText')
         makerText.innerHTML = " Choose and make element of Form ";
         this.makerChooseElem = <HTMLSelectElement>document.createElement('select');
         for (let i = 0; i < this.arr.length; i++) {
