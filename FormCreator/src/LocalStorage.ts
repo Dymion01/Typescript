@@ -22,6 +22,7 @@ export class MyLocalStorage {
       completedForm.id=localStorage.key(i);
       let deleteBtn = <HTMLElement>document.createElement('button');
         deleteBtn.innerText="Remove"
+        deleteBtn.classList.add('deleteBtn')
       deleteBtn.onclick = () =>{
         console.log(localStorage.key(i));
           let toRemove = document.getElementById(id);

@@ -29,6 +29,7 @@ import {Field} from './Field';
         let completedFormDiv = document.getElementById("completedFormDiv");
         comletedForm.id = Date.now().toString();
         let deleteBtn = <HTMLElement>document.createElement('button');
+        deleteBtn.classList.add('deleteBtn')
         deleteBtn.innerHTML ="Remove"
         deleteBtn.onclick = () =>{
             let container = document.getElementById("completedFormDiv");

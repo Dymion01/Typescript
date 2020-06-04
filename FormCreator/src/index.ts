@@ -12,10 +12,16 @@ x.appendChild(formMaker.GetMaker());
 let rootdiv = document.getElementById('root');
 let themer = document.getElementById('themer');
 themer.onclick = () => { 
-    if(rootdiv.classList.contains('theme-light'))
+    if(rootdiv.classList.contains('theme-light')){
+        themer.innerText="Light";
         rootdiv.classList.replace('theme-light', 'theme-dark');
-    else 
+        
+    }
+    else {
+        themer.innerText="Dark";
         rootdiv.classList.replace('theme-dark', 'theme-light');
+        
+    }
 }
 
 
