@@ -1,9 +1,0 @@
-label {
-    @include padding-margin(5px , 10px);
-    text-decoration:underline;
-}
-
-.big-label {
-    @include padding-margin(10px, 15px);
-    text-decoration:underline;
-}

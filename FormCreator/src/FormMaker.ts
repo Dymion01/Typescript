@@ -23,6 +23,7 @@ import {ExtendedSelectField} from './ExtendedSelectField';
             makerText.classList.add('makerText')
         makerText.innerHTML = " Choose and make element of Form ";
         this.makerChooseElem = <HTMLSelectElement>document.createElement('select');
+        // this.makerElemName.classList.add('inputs');
         for (let i = 0; i < this.arr.length; i++) {
             let option = <HTMLElement>document.createElement('option');
             option.setAttribute("value", this.arr[i]);
@@ -31,8 +32,10 @@ import {ExtendedSelectField} from './ExtendedSelectField';
         }
         this.makerChooseElem.addEventListener("change", () => this.AddSelectOptions());
         this.makerElemName = <HTMLInputElement>document.createElement('input');
+        // this.makerElemName.classList.add('imputs');
         this.makerElemName.setAttribute("placeholder", "Name");
         this.MakerElemLabel = <HTMLInputElement>document.createElement('input');
+        // this.MakerElemLabel.classList.add('imputs'); 
         this.MakerElemLabel.setAttribute("placeholder", "Label");
         this.formMaker.appendChild(makerText);
         this.formMaker.appendChild(this.makerChooseElem);

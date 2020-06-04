@@ -1,20 +1,22 @@
 $themes: (
   light: (
+    color:#f6cd61 ,
     backgroundColor:  #fe8a71,
     textColor: #4a4e4d,
     buttonTextColor: #fe8a71,
     buttonTextTransform: none,
     buttonTextHoverColor:#f57254,
     buttonColor: #f6cd61,
-    buttonBorder: 2px solid #4a4e4d,
+    answerColor: #666666,
   ),
   dark: (
+    color: #f57254,
     backgroundColor:#4a4e4d,
     textColor:  #3da4ab,
     buttonTextColor:  #3da4ab,
     buttonTextTransform: uppercase,
     buttonTextHoverColor:  #55d4dd,
     buttonColor: #fe8a71,
-    buttonBorder: 1px solid #f6cd61,
+    answerColor:  #f6cd61,
   ),
 );
