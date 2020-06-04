@@ -1,12 +1,23 @@
 import {FormMaker} from './FormMaker';
 import {MyLocalStorage} from './LocalStorage';
 import './styles/styles.scss';
+
+
 let q = new MyLocalStorage();
-// document.onload= () => q.render();
 q.render();
 let x = document.getElementById("formMakerDiv");
 let formMaker = new FormMaker();
 x.appendChild(formMaker.GetMaker());
+
+let rootdiv = document.getElementById('root');
+let themer = document.getElementById('themer');
+themer.onclick = () => { 
+    if(rootdiv.classList.contains('theme-light'))
+        rootdiv.classList.replace('theme-light', 'theme-dark');
+    else 
+        rootdiv.classList.replace('theme-dark', 'theme-light');
+}
+
 
 // var names:string[] = new Array("Mary","Tom","Jack","Jill")  
 // let s = new EmailField("email" , "Email" );
